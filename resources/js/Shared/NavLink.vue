@@ -8,9 +8,7 @@
 </template>
 
 <script>
-import { Link } from "vue";
 export default {
-    components: Link,
     props: {
         active: Boolean,
     },
