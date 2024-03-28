@@ -7,10 +7,8 @@
     </Link>
 </template>
 
-<script>
-export default {
-    props: {
-        active: Boolean,
-    },
-};
+<script setup>
+defineProps({
+    active: Boolean,
+});
 </script>

@@ -14,9 +14,6 @@
     </section>
 </template>
 
-<script>
+<script setup>
 import Nav from "./Nav.vue";
-export default {
-    components: { Nav },
-};
 </script>

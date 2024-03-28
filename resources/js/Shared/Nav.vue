@@ -2,17 +2,17 @@
     <nav>
         <ul class="flex list-disc space-x-4 list-inside">
             <li>
-                <NavLink href="/" class="text-blue-500 hover:underline"
+                <NavLink href="/" :active="$page.component == 'Home'"
                     >Home</NavLink
                 >
             </li>
             <li>
-                <NavLink href="/about" class="text-blue-500 hover:underline"
+                <NavLink href="/about" :active="$page.component == 'About'"
                     >About</NavLink
                 >
             </li>
             <li>
-                <NavLink href="/users" class="text-blue-500 hover:underline"
+                <NavLink href="/users" :active="$page.component == 'Users'"
                     >Users</NavLink
                 >
             </li>
@@ -25,10 +25,6 @@
     </nav>
 </template>
 
-<script>
-// import { Link } from "@inertiajs/vue3";
+<script setup>
 import NavLink from "./NavLink.vue";
-export default {
-    components: { NavLink },
-};
 </script>

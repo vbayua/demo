@@ -4,13 +4,9 @@
     </Layout>
 </template>
 
-<script>
+<script setup>
 import Layout from "../Shared/Layout.vue";
-
-export default {
-    layout: Layout,
-    props: {
-        name: String,
-    },
-};
+defineProps({
+    name: String,
+});
 </script>
