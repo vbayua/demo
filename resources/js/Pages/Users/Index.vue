@@ -70,6 +70,9 @@
 import Pagination from "../../Shared/Pagination.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
+// import throttle from "lodash/throttle";
+// or use debounce
+import debounce from "lodash/debounce";
 
 let props = defineProps({
     name: String,
@@ -79,14 +82,17 @@ let props = defineProps({
 
 let search = ref(props.filters.search);
 
-watch(search, (value) => {
-    router.get(
-        "/users",
-        { search: value },
-        {
-            preserveState: true,
-            replace: true,
-        }
-    );
-});
+watch(
+    search,
+    debounce((value) => {
+        router.get(
+            "/users",
+            { search: value },
+            {
+                preserveState: true,
+                replace: true,
+            }
+        );
+    }, 300)
+);
 </script>
