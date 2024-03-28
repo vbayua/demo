@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('app');
+    return Inertia::render('Home', [
+        'name' => 'Home',
+    ]);
+});
+
+Route::get('/about', function () {
+    return Inertia::render('About', [
+        'name' => 'About'
+    ]);
+});
+
+Route::get('/users', function () {
+    return Inertia::render('Users', [
+        'name' => 'Users'
+    ]);
+});
+
+Route::post('logout', function () {
+    dd('logg out');
 });
