@@ -13,6 +13,11 @@
                 v-model="form.name"
                 required
             />
+            <div
+                v-if="$page.props.errors.name"
+                v-text="$page.props.errors.name"
+                class="text-red-500 text-xs mt-1"
+            ></div>
         </label>
         <label for="email" class="block text-xs text-gray-700 mb-2">
             Email
@@ -38,6 +43,8 @@
         <button
             type="submit"
             class="bg-blue-400 text-white px-6 py-2 rounded-xl"
+            :class="{ 'hidden ': processing }"
+            :disabled="precessing"
         >
             Submit
         </button>
@@ -45,7 +52,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 
 let form = reactive({
@@ -54,7 +61,17 @@ let form = reactive({
     password: "",
 });
 
+let processing = ref(false);
+
 const submit = () => {
-    router.post("/users", form);
+    processing.value = true;
+    router.post("/users", form, {
+        onStart: () => {
+            processing.value = true;
+        },
+        onFinish: () => {
+            processing.value = false;
+        },
+    });
 };
 </script>
