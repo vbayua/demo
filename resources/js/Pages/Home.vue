@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <h1>{{ name }}</h1>
-    </div>
-    <Nav />
+    <Layout>
+        <h1>{{ name }} Coy</h1>
+    </Layout>
 </template>
 
 <script>
-import Nav from "../Shared/Nav.vue";
+import Layout from "../Shared/Layout.vue";
+
 export default {
-    components: { Nav },
+    layout: Layout,
     props: {
         name: String,
     },
