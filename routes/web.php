@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +29,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/users', function () {
-    return Inertia::render('Users', [
+    return Inertia::render('Users/Index', [
         'name' => 'Users',
         'users' => User::query()
             ->when(request('search'), function ($query, $search)  {
@@ -42,6 +44,22 @@ Route::get('/users', function () {
 
             'filters' => request()->only('search')
     ]);
+});
+
+Route::get('/users/create', function() {
+    return Inertia::render('Users/Create', ['name' => 'Create User']);
+});
+
+Route::post('/users', function(Request $request) {
+    $user = $request->validate([
+        'name'=> ['required','string', 'min:1'],
+        'email'=> ['required','email'],
+        'password'=> ['required','min:8'],
+    ]);
+
+    User::create($user);
+
+    return redirect('/users');
 });
 
 Route::post('logout', function () {

@@ -12,6 +12,13 @@
                 class="border px-2 rounded"
                 v-model="search"
             />
+
+            <Link
+                href="/users/create"
+                class="px-6 bg-blue-500 text-white rounded-xl"
+                as="button"
+                >Create User</Link
+            >
         </div>
 
         <div class="flex flex-col">
@@ -60,7 +67,7 @@
 </template>
 
 <script setup>
-import Pagination from "../Shared/Pagination.vue";
+import Pagination from "../../Shared/Pagination.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 
