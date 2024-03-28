@@ -14,8 +14,8 @@
                 required
             />
             <div
-                v-if="$page.props.errors.name"
-                v-text="$page.props.errors.name"
+                v-if="form.errors.name"
+                v-text="form.errors.name"
                 class="text-red-500 text-xs mt-1"
             ></div>
         </label>
@@ -28,6 +28,11 @@
                 v-model="form.email"
                 required
             />
+            <div
+                v-if="form.errors.email"
+                v-text="form.errors.email"
+                class="text-red-500 text-xs mt-1"
+            ></div>
         </label>
         <label for="password" class="block text-xs text-gray-700 mb-2">
             Password
@@ -38,13 +43,18 @@
                 v-model="form.password"
                 required
             />
+            <div
+                v-if="form.errors.password"
+                v-text="form.errors.password"
+                class="text-red-500 text-xs mt-1"
+            ></div>
         </label>
 
         <button
             type="submit"
             class="bg-blue-400 text-white px-6 py-2 rounded-xl"
-            :class="{ 'hidden ': processing }"
-            :disabled="precessing"
+            :class="{ 'hidden ': form.processing }"
+            :disabled="form.precessing"
         >
             Submit
         </button>
@@ -52,26 +62,15 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
-let form = reactive({
+let form = useForm({
     name: "",
     email: "",
     password: "",
 });
 
-let processing = ref(false);
-
 const submit = () => {
-    processing.value = true;
-    router.post("/users", form, {
-        onStart: () => {
-            processing.value = true;
-        },
-        onFinish: () => {
-            processing.value = false;
-        },
-    });
+    form.post("/users", form);
 };
 </script>
