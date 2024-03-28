@@ -1,4 +1,5 @@
 <template>
+    <Head :title="name" />
     <Layout>
         <h1>{{ name }} Coy</h1>
     </Layout>

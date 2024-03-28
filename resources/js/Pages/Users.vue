@@ -1,4 +1,6 @@
 <template>
+    <Head :title="name" />
+
     <Layout>
         <h1>{{ name }}</h1>
     </Layout>

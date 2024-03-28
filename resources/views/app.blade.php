@@ -6,7 +6,6 @@
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
     @inertiaHead
-    <title>VueInertia</title>
   </head>
   <body>
     @inertia
