@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-import Layout from "../Shared/Layout.vue";
 defineProps({
     name: String,
 });
