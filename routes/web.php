@@ -4,15 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('login', [LoginController::class,'create'])->name('login');
+Route::post('login', [LoginController::class,'store']);
 
 Route::get('/', function () {
     return Inertia::render('Home', [
         'name' => 'Home',
     ]);
-});
+})->middleware('auth');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -57,7 +58,5 @@ Route::middleware('auth')->group(function () {
         return redirect('/users');
     });
 
-    Route::post('logout', function () {
-        dd('logg out');
-    });
+    Route::post('logout', [LoginController::class,'destroy'])->name('logout');
 });
